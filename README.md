@@ -7,7 +7,8 @@ Ein GitHub-Template-Repository für eine Wissensbasis, mit der KI-Systeme (Chats
 1. Oben rechts auf **"Use this template"** klicken, um ein eigenes Repository daraus zu erzeugen.
 2. Die Beispieleinträge in `knowledge/` ansehen — sie zeigen das Muster (Frontmatter, Prüfdatum, Status, Verlinkung, Nachfolge-Beziehungen) an echten, untereinander verlinkten Beispielen, nicht nur in der Theorie.
 3. Mit `./scripts/search.sh <begriff>` durch die Beispiele suchen, um zu sehen, wie einfache Volltextsuche über Frontmatter und Inhalt funktioniert, bevor über einen Vektorindex nachgedacht wird.
-4. Beispielinhalte entfernen, sobald die eigene Struktur klar ist:
+4. Mit `./scripts/lint.sh` prüfen, ob alle Einträge vollständige Frontmatter haben, `related`-Verweise auflösbar sind und keine als `aktuell` markierten Einträge das Prüfintervall überschritten haben. Läuft auch automatisch als GitHub Action auf jeder Pull Request, die `knowledge/**` ändert.
+5. Beispielinhalte entfernen, sobald die eigene Struktur klar ist:
 
    ```bash
    ./scripts/clean-examples.sh
@@ -22,6 +23,13 @@ ai-knowledge-template/
 ├── README.md
 ├── LICENSE
 ├── GOVERNANCE.md
+├── .github/
+│   ├── CODEOWNERS
+│   ├── PULL_REQUEST_TEMPLATE.md
+│   ├── ISSUE_TEMPLATE/
+│   │   └── eintrag-melden.md
+│   └── workflows/
+│       └── lint.yml
 ├── knowledge/
 │   ├── _template.md
 │   ├── entscheidungen/
@@ -39,14 +47,20 @@ ai-knowledge-template/
 │       └── vektorindex.md
 └── scripts/
     ├── clean-examples.sh
+    ├── lint.sh
     └── search.sh
 ```
 
 - **`knowledge/`** — die eigentliche Wissensbasis, nach Typ geordnet. Vier Kategorien sind vorgegeben (Entscheidungen, Prozesse, Produkte, Glossar), lassen sich aber umbenennen oder erweitern.
 - **`knowledge/_template.md`** — Frontmatter-Vorlage für neue Einträge: Titel, Typ, Erstellungsdatum, Datum der letzten Prüfung, Status, Quelle, verwandte Einträge.
 - **`GOVERNANCE.md`** — wer schreiben darf, wer lesen darf, was hier explizit nicht hineingehört.
+- **`.github/CODEOWNERS`** — macht die Zuständigkeit aus `GOVERNANCE.md` technisch verbindlich (Platzhalter-Handles, zum Anpassen).
+- **`.github/PULL_REQUEST_TEMPLATE.md`** — Checkliste für neue oder geänderte Einträge, gespiegelt aus `knowledge/prozesse/eintrag-review.md`.
+- **`.github/ISSUE_TEMPLATE/eintrag-melden.md`** — Vorlage, um einen falschen oder veralteten Eintrag zu melden.
+- **`.github/workflows/lint.yml`** — führt `scripts/lint.sh` bei jeder Pull Request aus, die `knowledge/**` ändert.
 - **`scripts/clean-examples.sh`** — entfernt alle Beispielinhalte nach der Template-Nutzung, behält die Struktur.
 - **`scripts/search.sh`** — einfache Volltextsuche über `knowledge/`, zeigt Fundstelle, Status und Titel pro Treffer.
+- **`scripts/lint.sh`** — prüft Frontmatter-Vollständigkeit, gültige `status`-Werte, `type`-Konsistenz mit dem Ordner, auflösbare `related`-Verweise und überfällige Prüfdaten. Exit-Code 1 bei Problemen, nutzbar lokal und in CI.
 
 ## Warum diese Struktur
 

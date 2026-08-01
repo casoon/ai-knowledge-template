@@ -1,0 +1,13 @@
+name: Lint knowledge base
+
+on:
+  pull_request:
+    paths:
+      - "knowledge/**"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: ./scripts/lint.sh
