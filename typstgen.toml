@@ -1,0 +1,3 @@
+# `documents/` ist die geschlossene virtuelle Dateiwurzel für alle Typst-
+# Quellen, Templates, Stammdaten und Übersetzungen dieses Projekts.
+template_paths = ["./documents"]

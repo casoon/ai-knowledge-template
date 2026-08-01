@@ -25,6 +25,7 @@ ai-knowledge-template/
 ├── LICENSE
 ├── GOVERNANCE.md
 ├── .sops.yaml
+├── typstgen.toml
 ├── .github/
 │   ├── CODEOWNERS
 │   ├── PULL_REQUEST_TEMPLATE.md
@@ -40,9 +41,26 @@ ai-knowledge-template/
 │   ├── prozesse/
 │   ├── produkte/
 │   ├── glossar/
+│   ├── kunden/
+│   ├── projekte/
+│   ├── angebote/
+│   ├── auftragsbestaetigungen/
+│   ├── protokolle/
+│   ├── aenderungen/
+│   ├── abnahmen/
+│   ├── abrechnung/
+│   ├── service/
 │   ├── secrets/
 │   └── example-assets/
 ├── site/                      (optional: Astro Starlight, nur public:true)
+├── documents/                 (geschlossene Typst-Wurzel, PDFs werden nicht committed)
+│   ├── _data/                 (Stammdaten und Übersetzungen)
+│   ├── templates/
+│   └── …
+├── skills/                    (Arbeitsabläufe für Coding-Agenten)
+│   ├── document-workflow/
+│   ├── locale-maintenance/
+│   └── knowledge-document-link/
 └── scripts/
     └── search.sh
 ```
@@ -55,9 +73,26 @@ Validiert wird mit [`knowledge-lint`](https://github.com/casoon/knowledge-lint) 
   - `knowledge_entry` — normaler Markdown-Eintrag mit Frontmatter (Standardfall: `entscheidungen/`, `prozesse/`, `produkte/`, `glossar/`).
   - `sops_secret` — SOPS-verschlüsselte YAML-Dateien, kein Frontmatter-Schema (`secrets/`).
   - `assets` — reiner Ablageort für Dateien, die aus `_attachments.yml` referenziert werden (`example-assets/`).
-- **`_template.md`** — Frontmatter-Vorlage für neue `knowledge_entry`-Einträge: `title`, `type`, `created`, `last_reviewed`, `status`, `source`, `related`, `public`.
+- **`_template.md`** — Frontmatter-Vorlage für neue `knowledge_entry`-Einträge: `title`, `type`, `created`, `last_reviewed`, `status`, `source`, `related`, `public`. Für Kunden- und Prozessartefakte stehen zusätzlich optionale Felder für Schutzklasse, Dokument-ID, Dokumentstatus und Typst-Quelle bereit.
 - **`_attachments.yml`** — zentrale Registry für Verweise auf große Originaldateien (Scans, Exporte, PDFs), die nicht ins Repo eingebettet werden. [`knowledge-lint`](https://github.com/casoon/knowledge-lint) prüft, ob referenzierte Pfade noch existieren.
 - **`secrets/`** — SOPS+age-verschlüsselte Dateien, siehe [`GOVERNANCE.md`](GOVERNANCE.md#geheime-daten). Bevorzugtes Muster bleibt aber ein `vault://`-Verweis statt Inline-Secrets, auch verschlüsselt.
+
+### Freelancer-Ablauf und PDF-Ausgaben
+
+Die zusätzlichen Beispielkategorien zeigen einen vollständigen, fiktiven Ablauf: `kunde → projekt → angebot → auftragsbestätigung → kickoff-protokoll → änderung → abnahme → rechnung → service`. Sie enthalten bewusst nur KI-lesbare Zusammenfassungen und stabile Dokument-IDs, keine echten personenbezogenen Daten oder Zahlungsdaten.
+
+Der Wissensstatus (`status: aktuell | veraltet`) und der Geschäftsstatus eines Dokuments (`document_status`, z. B. `sent`, `accepted`, `paid`) sind getrennt: Eine versandte Rechnung kann als Wissenseintrag weiterhin aktuell sein. `typst_source` ist der vorgesehene Anker für ein privates `typstgen`, das PDF-Ausgaben bei Bedarf generiert. Die PDFs selbst gehören nicht in den RAG-Index.
+
+Unter `documents/` liegen dafür sechs zusammenhängende Typst-Demos (Angebot, Auftragsbestätigung, Protokoll, Abnahme, Rechnung und Servicevereinbarung). Templates, Demo-Stammdaten und Übersetzungen sind dort als echte Dateien abgelegt; sie werden über `typstgen compile <quelle> --config typstgen.toml` direkt zu PDFs. Details stehen in [`documents/README.md`](documents/README.md).
+
+Für einen privaten Klon, der sensible Kunden-, Angebots- oder Rechnungsdaten enthält, ist `classification` (`internal`, `confidential`, `secret`) eine Abrufvorgabe. Sie muss durch die Retrieval- und Berechtigungsschicht erzwungen werden; Frontmatter allein schützt keine Daten.
+
+### `skills/` — wiederholbare Agenten-Abläufe
+
+Die drei lokalen Skills beschreiben den PDF-Workflow, die Pflege der acht
+Locale-Dateien und die Konsistenz zwischen Wissens- und Typst-Dokumenten. Sie
+ergänzen die vorhandenen Dateien und Validierer; sie sind keine Quelle für
+Kunden- oder Projektdaten.
 
 ### Validierung und Pflege: [`knowledge-lint`](https://github.com/casoon/knowledge-lint)
 
@@ -102,6 +137,7 @@ Jeder Beispieleintrag demonstriert eine konkrete Praxis, und die Einträge verli
 - `knowledge/prozesse/eintrag-review.md` beschreibt den Prozess, der die anderen Beispiele konsistent hält.
 - `knowledge/glossar/rag.md`, `chunking.md` und `vektorindex.md` bilden ein kleines verlinktes Glossar, alle drei `public: true` — deshalb erscheinen genau diese drei in `site/`, wenn es gebaut wird.
 - `knowledge/secrets/beispiel-credential.yaml` ist echt SOPS-verschlüsselt (nicht simuliert), aber mit einem Demo-Schlüssel, dessen privater Teil nirgends im Repo existiert — für niemanden entschlüsselbar, rein zur Strukturdemonstration.
+- Die neuen Einträge unter `kunden/`, `projekte/`, `angebote/`, `auftragsbestaetigungen/`, `protokolle/`, `aenderungen/`, `abnahmen/`, `abrechnung/` und `service/` bilden einen durchgängigen Freelancer-Vorgang ab. Sie zeigen, wie ein RAG-System Projekt- und Geschäftskontext nutzen kann, ohne auf generierte PDFs angewiesen zu sein.
 
 Der Hintergrund dazu steht in einem begleitenden Artikel auf insights.casoon.de (folgt in Kürze).
 

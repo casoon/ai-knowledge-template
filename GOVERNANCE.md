@@ -14,6 +14,16 @@ Zugriffsrechte einer KI auf diese Wissensbasis entsprechen den Zugriffsrechten, 
 
 Personenbezogene Daten, vertrauliche Verträge, interne Bewertungen einzelner Personen. Im Zweifel: nicht aufnehmen, sondern separat und zugriffsbeschränkt verwalten.
 
+## Sensible Daten im privaten Klon
+
+Die öffentliche Vorlage enthält nur fiktive Daten. Ein privater Klon kann Kunden-, Angebots- und Rechnungsdaten enthalten, wenn die verantwortliche Person das bewusst erlaubt. Jeder solcher Eintrag erhält eine `classification`:
+
+- `internal` — für interne Arbeit ohne besondere Freigabe.
+- `confidential` — nur für Rollen mit Kunden- oder Finanzbezug.
+- `secret` — Zugangsdaten und vergleichbare Geheimnisse; nur für den konkreten, notwendigen Vorgang abrufbar.
+
+Die Berechtigung muss vor dem Retrieval geprüft werden. Verschlüsselung schützt gespeicherte Daten, ersetzt aber keine Zugriffskontrolle: Kann ein Agent einen Secret-Eintrag entschlüsseln und abrufen, kann er seinen Inhalt auch in einer Antwort ausgeben. Daher nur die minimal erforderlichen Einträge in den Kontext laden und Zugriffe protokollieren.
+
 ## Geheime Daten
 
 Bevorzugtes Muster: **gar nicht speichern, nur referenzieren.** Ein Passwort oder API-Key gehört in einen echten Passwort-Manager/Vault, ein Wissenseintrag verweist nur darauf, z. B. `Zugang: vault://kunde-x/webserver`. Das ist robuster als jede Verschlüsselung im Repo, weil Key-Rotation, Zugriffsprotokolle und Widerruf dort bereits gelöst sind.

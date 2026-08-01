@@ -4,3 +4,7 @@
 /site/.astro/
 # von scripts/sync-public.mjs generiert, nicht Quelle
 /site/src/content/docs/
+
+# typstgen erzeugt PDFs nur bei Bedarf. Die Typst-Quellen gehören ins Repo,
+# die binären Ausgaben nicht in den RAG-Bestand.
+/documents/**/*.pdf

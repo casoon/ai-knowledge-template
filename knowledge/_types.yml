@@ -32,6 +32,42 @@ categories:
     kind: knowledge_entry
     type: glossar
     review_interval_days: 365
+  kunden:
+    kind: knowledge_entry
+    type: kunde
+    review_interval_days: 90
+  projekte:
+    kind: knowledge_entry
+    type: projekt
+    review_interval_days: 30
+  angebote:
+    kind: knowledge_entry
+    type: angebot
+    review_interval_days: 30
+  auftragsbestaetigungen:
+    kind: knowledge_entry
+    type: auftragsbestaetigung
+    review_interval_days: 365
+  protokolle:
+    kind: knowledge_entry
+    type: protokoll
+    review_interval_days: 90
+  aenderungen:
+    kind: knowledge_entry
+    type: aenderung
+    review_interval_days: 90
+  abnahmen:
+    kind: knowledge_entry
+    type: abnahme
+    review_interval_days: 365
+  abrechnung:
+    kind: knowledge_entry
+    type: abrechnung
+    review_interval_days: 365
+  service:
+    kind: knowledge_entry
+    type: service
+    review_interval_days: 90
   secrets:
     kind: sops_secret
   example-assets:
