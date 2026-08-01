@@ -14,9 +14,31 @@ Zugriffsrechte einer KI auf diese Wissensbasis entsprechen den Zugriffsrechten, 
 
 Personenbezogene Daten, vertrauliche Verträge, interne Bewertungen einzelner Personen. Im Zweifel: nicht aufnehmen, sondern separat und zugriffsbeschränkt verwalten.
 
+## Geheime Daten
+
+Bevorzugtes Muster: **gar nicht speichern, nur referenzieren.** Ein Passwort oder API-Key gehört in einen echten Passwort-Manager/Vault, ein Wissenseintrag verweist nur darauf, z. B. `Zugang: vault://kunde-x/webserver`. Das ist robuster als jede Verschlüsselung im Repo, weil Key-Rotation, Zugriffsprotokolle und Widerruf dort bereits gelöst sind.
+
+Wenn strukturierte Geheimdaten trotzdem versioniert werden müssen (z. B. eine Konfiguration mit eingebetteten Werten), ist `knowledge/secrets/` mit [SOPS](https://github.com/getsops/sops) + [age](https://github.com/FiloSottile/age) der Fallback — verschlüsselt nur die Werte, Struktur und Keys bleiben lesbar und diffbar:
+
+```bash
+# einmalig: eigenes Schlüsselpaar erzeugen, NIE ins Repo committen
+age-keygen -o ~/.config/sops/age/keys.txt
+
+# Public Key aus der Ausgabe in .sops.yaml eintragen (den Demo-Key ersetzen)
+
+# neue Datei verschlüsseln
+sops -e -i knowledge/secrets/neue-datei.yaml
+
+# lokal entschlüsseln (SOPS_AGE_KEY_FILE zeigt auf den privaten Schlüssel)
+export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
+sops -d knowledge/secrets/neue-datei.yaml
+```
+
+`tools/knowledge-lint` prüft bei jedem Lauf, dass jede Datei unter `secrets/` tatsächlich ein SOPS-`sops:`-Metadatenfeld enthält, und scannt den Rest der Wissensbasis auf offensichtliche Klartext-Schlüsselmuster.
+
 ## Prüfintervall
 
-[Anpassen: z. B. Einträge unter `produkte/` und `prozesse/` werden vierteljährlich geprüft. `entscheidungen/` bleibt als Historie unverändert stehen und wird bei Bedarf durch einen neuen Eintrag ergänzt statt überschrieben. `glossar/` wird bei Bedarf aktualisiert.] `scripts/lint.sh` markiert `aktuell`-Einträge automatisch, deren `last_reviewed` das eingestellte Intervall überschreitet — der Standardwert im Skript sollte auf das hier festgelegte Intervall angepasst werden, nicht umgekehrt.
+[Anpassen: z. B. Einträge unter `produkte/` und `prozesse/` werden vierteljährlich geprüft. `entscheidungen/` bleibt als Historie unverändert stehen und wird bei Bedarf durch einen neuen Eintrag ergänzt statt überschrieben. `glossar/` wird bei Bedarf aktualisiert.] `knowledge/_types.yml` legt pro Kategorie ein `review_interval_days` fest, gegen das `tools/knowledge-lint` prüft — der Wert dort sollte dem hier festgelegten Intervall entsprechen, nicht umgekehrt.
 
 ## Fehler melden
 

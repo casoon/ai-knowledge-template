@@ -1,0 +1,31 @@
+# Deklariert die Kategorien der Wissensbasis. Neue Kategorie = neuer Eintrag
+# hier, kein Code-Change in tools/knowledge-lint nötig.
+#
+# kind: knowledge_entry — normaler Markdown-Eintrag mit Frontmatter, wird
+#   gegen type/review_interval_days geprüft.
+# kind: sops_secret — SOPS-verschlüsselte YAML-Datei, kein Frontmatter-Schema,
+#   wird nur auf ein vorhandenes `sops:`-Metadatenfeld geprüft (= verschlüsselt).
+# kind: assets — reiner Ablageort für Dateien, die aus _attachments.yml
+#   referenziert werden. Keine Inhaltsprüfung.
+
+categories:
+  entscheidungen:
+    kind: knowledge_entry
+    type: entscheidung
+    review_interval_days: 365
+  prozesse:
+    kind: knowledge_entry
+    type: prozess
+    review_interval_days: 365
+  produkte:
+    kind: knowledge_entry
+    type: produkt
+    review_interval_days: 180
+  glossar:
+    kind: knowledge_entry
+    type: glossar
+    review_interval_days: 365
+  secrets:
+    kind: sops_secret
+  example-assets:
+    kind: assets

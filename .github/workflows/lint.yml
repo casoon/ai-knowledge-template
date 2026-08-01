@@ -4,10 +4,15 @@ on:
   pull_request:
     paths:
       - "knowledge/**"
+      - "tools/knowledge-lint/**"
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: ./scripts/lint.sh
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: tools/knowledge-lint
+      - run: cargo run --manifest-path tools/knowledge-lint/Cargo.toml --quiet -- lint knowledge

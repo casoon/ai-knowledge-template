@@ -1,0 +1,1 @@
+Platzhalter für eine große Originaldatei (Scan, Export, Vertrag als PDF o. Ä.), die nicht im Klartext-Wissenseintrag eingebettet, sondern nur referenziert wird. Siehe knowledge/_attachments.yml und knowledge/entscheidungen/2026-01-tooling-wahl.md.

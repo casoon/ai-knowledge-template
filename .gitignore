@@ -1,0 +1,8 @@
+/tools/knowledge-lint/target/
+
+# site/ (Astro Starlight)
+/site/node_modules/
+/site/dist/
+/site/.astro/
+# von scripts/sync-public.mjs generiert, nicht Quelle
+/site/src/content/docs/

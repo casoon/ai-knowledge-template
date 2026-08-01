@@ -1,0 +1,17 @@
+# SOPS-Verschlüsselungsregeln. Der Age-Public-Key unten ist ein DEMO-Schlüssel,
+# nur zur Verschlüsselung von knowledge/secrets/beispiel-credential.yaml in
+# diesem Template. Der zugehörige private Schlüssel ist nirgends in diesem
+# Repository enthalten und wurde nach der Erstellung verworfen — dieser
+# Beispiel-Eintrag ist also für niemanden entschlüsselbar, auch nicht für uns.
+#
+# Vor echtem Gebrauch: eigenes Schlüsselpaar erzeugen und den Public Key
+# unten ersetzen.
+#
+#   age-keygen -o ~/.config/sops/age/keys.txt
+#
+# Der private Schlüssel bleibt lokal (z. B. über SOPS_AGE_KEY_FILE), niemals
+# im Repository.
+
+creation_rules:
+  - path_regex: knowledge/secrets/.*\.yaml$
+    age: age1gdhu3v7rs5zut2fmyesv8cwfzkpjzgrf00htn9w20jqsraxj29jqz953c2

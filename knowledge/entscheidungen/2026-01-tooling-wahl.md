@@ -25,3 +25,7 @@ Für das interne RAG-System wird eine Vektor-Datenbank benötigt, die sich in di
 ## Konsequenzen
 
 Bei deutlich wachsendem Datenvolumen (> 1 Mio. Einträge) muss diese Entscheidung erneut geprüft werden. Dieser Eintrag ist dann fällig zur Überprüfung, nicht stillschweigend weiter gültig — daher bleibt er stehen, statt gelöscht zu werden, auch wenn sich die Entscheidung später ändert.
+
+## Anhang
+
+Das Lastprofil aus dem Architektur-Review liegt als Originaldatei vor, nicht eingebettet — siehe `beispiel-anhang` in [`_attachments.yml`](../_attachments.yml).

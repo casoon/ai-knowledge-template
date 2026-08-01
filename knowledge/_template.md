@@ -6,6 +6,7 @@ last_reviewed: YYYY-MM-DD
 status: aktuell
 source: ""
 related: []
+public: false # true = wird von site/ als Starlight-Doku veröffentlicht
 ---
 
 ## Inhalt
