@@ -2,15 +2,17 @@
 # PDFs), die NICHT ins Repository eingebettet werden sollen — eine KI kann mit
 # einem rohen Binärblob im Kontext ohnehin wenig anfangen. Stattdessen: ein
 # Markdown-Eintrag mit Text-Extrakt/Zusammenfassung, plus hier ein Verweis auf
-# das Original. tools/knowledge-lint prüft bei jedem Lauf, ob lokale Pfade
-# noch existieren und ob http(s)-URLs erreichbar sind.
+# das Original. knowledge-lint (github.com/casoon/knowledge-lint) prüft bei
+# jedem Lauf, ob lokale Pfade noch existieren und ob http(s)-URLs erreichbar
+# sind.
 #
-# Pfade sind relativ zu diesem Verzeichnis (knowledge/). Netzlaufwerk-Schemata
-# (smb://, afp://, nas://) werden nicht geprüft, da von CI aus nicht erreichbar.
+# path und referenced_by sind beide relativ zu diesem Verzeichnis (knowledge/).
+# Netzlaufwerk-Schemata (smb://, afp://, nas://) werden bei path nicht
+# geprüft, da von CI aus nicht erreichbar.
 
 attachments:
   - id: beispiel-anhang
     path: "./example-assets/beispiel-anhang.txt"
     description: "Beispiel: Verweis auf eine große Originaldatei außerhalb der Wissensbasis"
     referenced_by:
-      - knowledge/entscheidungen/2026-01-tooling-wahl.md
+      - entscheidungen/2026-01-tooling-wahl.md
