@@ -1,5 +1,3 @@
-/tools/knowledge-lint/target/
-
 # site/ (Astro Starlight)
 /site/node_modules/
 /site/dist/

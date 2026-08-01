@@ -4,7 +4,6 @@ on:
   pull_request:
     paths:
       - "knowledge/**"
-      - "tools/knowledge-lint/**"
 
 jobs:
   lint:
@@ -12,7 +11,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
-      - uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: tools/knowledge-lint
-      - run: cargo run --manifest-path tools/knowledge-lint/Cargo.toml --quiet -- lint knowledge
+      - run: cargo install --git https://github.com/casoon/knowledge-lint --locked
+      - run: knowledge-lint lint knowledge

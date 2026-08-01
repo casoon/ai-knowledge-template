@@ -34,11 +34,11 @@ export SOPS_AGE_KEY_FILE=~/.config/sops/age/keys.txt
 sops -d knowledge/secrets/neue-datei.yaml
 ```
 
-`tools/knowledge-lint` prüft bei jedem Lauf, dass jede Datei unter `secrets/` tatsächlich ein SOPS-`sops:`-Metadatenfeld enthält, und scannt den Rest der Wissensbasis auf offensichtliche Klartext-Schlüsselmuster.
+[`knowledge-lint`](https://github.com/casoon/knowledge-lint) prüft bei jedem Lauf, dass jede Datei unter `secrets/` tatsächlich ein SOPS-`sops:`-Metadatenfeld enthält, und scannt den Rest der Wissensbasis auf offensichtliche Klartext-Schlüsselmuster.
 
 ## Prüfintervall
 
-[Anpassen: z. B. Einträge unter `produkte/` und `prozesse/` werden vierteljährlich geprüft. `entscheidungen/` bleibt als Historie unverändert stehen und wird bei Bedarf durch einen neuen Eintrag ergänzt statt überschrieben. `glossar/` wird bei Bedarf aktualisiert.] `knowledge/_types.yml` legt pro Kategorie ein `review_interval_days` fest, gegen das `tools/knowledge-lint` prüft — der Wert dort sollte dem hier festgelegten Intervall entsprechen, nicht umgekehrt.
+[Anpassen: z. B. Einträge unter `produkte/` und `prozesse/` werden vierteljährlich geprüft. `entscheidungen/` bleibt als Historie unverändert stehen und wird bei Bedarf durch einen neuen Eintrag ergänzt statt überschrieben. `glossar/` wird bei Bedarf aktualisiert.] `knowledge/_types.yml` legt pro Kategorie ein `review_interval_days` fest, gegen das [`knowledge-lint`](https://github.com/casoon/knowledge-lint) prüft — der Wert dort sollte dem hier festgelegten Intervall entsprechen, nicht umgekehrt.
 
 ## Fehler melden
 

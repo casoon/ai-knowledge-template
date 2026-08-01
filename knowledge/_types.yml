@@ -7,6 +7,13 @@
 #   wird nur auf ein vorhandenes `sops:`-Metadatenfeld geprüft (= verschlüsselt).
 # kind: assets — reiner Ablageort für Dateien, die aus _attachments.yml
 #   referenziert werden. Keine Inhaltsprüfung.
+#
+# status_values/active_status: Das Lint-Tool (github.com/casoon/knowledge-lint)
+# ist sprachunabhängig, Default ist Englisch (current/deprecated) — hier
+# explizit auf unser deutsches Vokabular festgelegt.
+
+status_values: [aktuell, veraltet]
+active_status: aktuell
 
 categories:
   entscheidungen:
