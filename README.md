@@ -1,25 +1,44 @@
-# AI Knowledge Practices
+# AI Knowledge Template
 
-Ein offenes, herstellerneutrales Referenzmodell für den Umgang mit Wissen in KI-gestützten Arbeitsabläufen — Chats, RAG-Systeme, Agenten, Coding-Assistenten.
+Ein GitHub-Template-Repository für eine Wissensbasis, mit der KI-Systeme (Chats, RAG, Agenten) zuverlässig arbeiten können. Kein Framework, keine Installation — eine Ordnerstruktur mit echten Beispielinhalten, die zeigen, wie sich das anwenden lässt, statt es nur zu beschreiben.
 
-Kein Produkt, kein Framework zum Installieren. Eine Sammlung von Best Practices, an denen sich Teams orientieren können, wenn KI dauerhaft mit belastbarem, aktuellem Wissen arbeiten soll — statt bei jedem Chat wieder bei null anzufangen.
+## Nutzen
 
-## Warum
+1. Oben rechts auf **"Use this template"** klicken, um ein eigenes Repository daraus zu erzeugen.
+2. Die Beispieleinträge in `knowledge/` ansehen — sie zeigen das Muster (Frontmatter, Prüfdatum, Status, Verlinkung) an echten Beispielen, nicht nur in der Theorie.
+3. Beispielinhalte entfernen, sobald die eigene Struktur klar ist:
 
-Die meisten Diskussionen über KI im Unternehmen drehen sich um das Modell: welches LLM, welcher Anbieter, welcher Preis. In der Praxis scheitern Projekte seltener am Modell und häufiger daran, wie Wissen organisiert, aktuell gehalten und der KI zugänglich gemacht wird. Dieses Repository sammelt die Praktiken, die dabei tatsächlich einen Unterschied machen.
+   ```bash
+   ./scripts/clean-examples.sh
+   ```
+
+   Das Skript löscht alle Beispiel-Einträge und lässt die Ordnerstruktur sowie `knowledge/_template.md` als Vorlage für neue Einträge stehen.
 
 ## Struktur
 
-- [`best-practices/01-quellen-und-wissensbasis.md`](best-practices/01-quellen-und-wissensbasis.md) — eine Quelle der Wahrheit statt verstreuter Chatverläufe
-- [`best-practices/02-struktur-und-metadaten.md`](best-practices/02-struktur-und-metadaten.md) — Format, Frontmatter, Verlinkung
-- [`best-practices/03-versionierung-und-aktualitaet.md`](best-practices/03-versionierung-und-aktualitaet.md) — Wissen altert, das muss sichtbar sein
-- [`best-practices/04-retrieval-und-kontext.md`](best-practices/04-retrieval-und-kontext.md) — wie Wissen zur richtigen Zeit in den Kontext kommt
-- [`best-practices/05-governance-und-zugriff.md`](best-practices/05-governance-und-zugriff.md) — wer darf was einspeisen, wer darf was lesen
-- [`best-practices/06-qualitaetssicherung.md`](best-practices/06-qualitaetssicherung.md) — Halluzination und veraltetes Wissen erkennbar machen
+```
+ai-knowledge-template/
+├── README.md
+├── LICENSE
+├── GOVERNANCE.md
+├── knowledge/
+│   ├── _template.md
+│   ├── entscheidungen/
+│   ├── prozesse/
+│   ├── produkte/
+│   └── glossar/
+└── scripts/
+    └── clean-examples.sh
+```
 
-## Status
+- **`knowledge/`** — die eigentliche Wissensbasis, nach Typ geordnet. Vier Kategorien sind vorgegeben (Entscheidungen, Prozesse, Produkte, Glossar), lassen sich aber umbenennen oder erweitern.
+- **`knowledge/_template.md`** — Frontmatter-Vorlage für neue Einträge: Titel, Typ, Erstellungsdatum, Datum der letzten Prüfung, Status, Quelle, verwandte Einträge.
+- **`GOVERNANCE.md`** — wer schreiben darf, wer lesen darf, was hier explizit nicht hineingehört.
+- **`scripts/clean-examples.sh`** — entfernt alle Beispielinhalte nach der Template-Nutzung, behält die Struktur.
 
-Frühe Fassung (v0.1). Die Einträge sind Ausgangspunkte, keine abgeschlossenen Standards — Ergänzungen und Widerspruch sind ausdrücklich willkommen.
+## Warum diese Struktur
+
+Jeder Beispieleintrag demonstriert eine konkrete Praxis: `knowledge/produkte/produkt-x-preismodell.md` zeigt, wie ein veralteter Eintrag markiert statt stillschweigend überschrieben wird. `knowledge/entscheidungen/2026-01-tooling-wahl.md` zeigt, wie eine Entscheidung mit Begründung und Quelle nachvollziehbar bleibt. Der Hintergrund dazu steht in einem begleitenden Artikel auf insights.casoon.de (folgt in Kürze).
 
 ## Lizenz
 
