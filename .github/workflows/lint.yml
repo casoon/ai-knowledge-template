@@ -1,15 +1,51 @@
 name: Lint knowledge base
 
+# Läuft auch bei direkten Pushes auf den Standardbranch, nicht nur bei Pull
+# Requests: In einem privaten Repository mit einer Person entstehen die meisten
+# Einträge ohne PR, und ein Lint, der dort nie läuft, ist keiner.
 on:
+  push:
+    branches: [master, main]
+    paths:
+      - "knowledge/**"
+      - "documents/_data/locales/**"
+      - "scripts/check-locales.sh"
+      - ".github/workflows/lint.yml"
   pull_request:
     paths:
       - "knowledge/**"
+      - "documents/_data/locales/**"
+      - "scripts/check-locales.sh"
+      - ".github/workflows/lint.yml"
 
 jobs:
   lint:
     runs-on: ubuntu-latest
+    env:
+      # Auf einen Commit gepinnt, damit eine Änderung an knowledge-lint nicht
+      # gleichzeitig alle abgeleiteten Repositories rot färbt. Bewusst
+      # aktualisieren, nicht automatisch mitziehen.
+      KNOWLEDGE_LINT_REV: 8a22e9c821e38173c127b3904ff6a443582a4773
     steps:
       - uses: actions/checkout@v4
+
       - uses: dtolnay/rust-toolchain@stable
-      - run: cargo install --git https://github.com/casoon/knowledge-lint --locked
-      - run: knowledge-lint lint knowledge
+
+      - name: knowledge-lint aus Cache holen
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/knowledge-lint
+          key: knowledge-lint-${{ runner.os }}-${{ env.KNOWLEDGE_LINT_REV }}
+
+      - name: knowledge-lint bauen
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          cargo install --git https://github.com/casoon/knowledge-lint \
+            --rev "$KNOWLEDGE_LINT_REV" --locked
+
+      - name: Wissensbasis prüfen
+        run: knowledge-lint lint knowledge
+
+      - name: Locale-Dateien gegen de.json prüfen
+        run: ./scripts/check-locales.sh

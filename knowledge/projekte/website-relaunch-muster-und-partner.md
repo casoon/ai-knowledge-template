@@ -5,7 +5,7 @@ created: 2026-07-15
 last_reviewed: 2026-08-01
 status: aktuell
 source: "Fiktives Projektbriefing für dieses Template"
-related: ["../kunden/muster-und-partner.md", "../angebote/CAS-ANG-2026-001-website-relaunch.md", "../protokolle/2026-07-22-kickoff-website-relaunch.md"]
+related: ["../kunden/muster-und-partner.md", "../angebote/CAS-ANG-2026-001-website-relaunch.md", "../protokolle/2026-07-22-kickoff-website-relaunch.md", "../konzepte/CAS-KON-2026-001-website-relaunch.md", "../dokumentation/CAS-DOC-2026-001-redaktion-und-betrieb.md"]
 public: false
 classification: confidential
 project_id: P-2026-001

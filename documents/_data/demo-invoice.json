@@ -1,0 +1,16 @@
+{
+  "id": "RE-2026-001",
+  "date": "01.08.2026",
+  "due_date": "15.08.2026",
+  "performance_period": "16.07.2026 bis 31.07.2026",
+  "customer_number": "K-2026-001",
+  "items": [
+    {"title": "Strategie und Informationsarchitektur", "quantity": "1", "unit": "Pauschale", "net": "1.250,00 EUR"},
+    {"title": "Design und Komponenten", "quantity": "1", "unit": "Pauschale", "net": "1.800,00 EUR"}
+  ],
+  "net_total": "3.050,00 EUR",
+  "vat_rate": "19 %",
+  "vat": "579,50 EUR",
+  "gross_total": "3.629,50 EUR",
+  "payment_reference": "RE-2026-001 / P-2026-001"
+}

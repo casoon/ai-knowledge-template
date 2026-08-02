@@ -1,5 +1,5 @@
 # Deklariert die Kategorien der Wissensbasis. Neue Kategorie = neuer Eintrag
-# hier, kein Code-Change in tools/knowledge-lint nötig.
+# hier, kein Code-Change in knowledge-lint nötig.
 #
 # kind: knowledge_entry — normaler Markdown-Eintrag mit Frontmatter, wird
 #   gegen type/review_interval_days geprüft.
@@ -44,6 +44,14 @@ categories:
     kind: knowledge_entry
     type: angebot
     review_interval_days: 30
+  konzepte:
+    kind: knowledge_entry
+    type: konzept
+    review_interval_days: 180
+  dokumentation:
+    kind: knowledge_entry
+    type: dokumentation
+    review_interval_days: 180
   auftragsbestaetigungen:
     kind: knowledge_entry
     type: auftragsbestaetigung

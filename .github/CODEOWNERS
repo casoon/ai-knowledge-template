@@ -1,7 +1,37 @@
 # Governance-Zuständigkeiten pro Bereich, siehe GOVERNANCE.md.
-# Platzhalter — durch echte GitHub-Handles oder Teams ersetzen.
+# Platzhalter — durch echte GitHub-Handles oder Teams ersetzen (siehe SETUP.md).
+#
+# Die letzte passende Regel gewinnt. Die erste Zeile ist deshalb ein
+# Auffangnetz: jede Datei hat eine zuständige Person, auch neu angelegte
+# Kategorien, die hier noch nicht stehen.
 
-/knowledge/entscheidungen/ @dein-team-lead
-/knowledge/produkte/       @dein-produkt-team
-/knowledge/prozesse/       @dein-ops-team
-/knowledge/glossar/        @dein-team-lead
+*                                     @dein-team-lead
+
+# Wissensbasis — allgemein
+/knowledge/entscheidungen/            @dein-team-lead
+/knowledge/prozesse/                  @dein-ops-team
+/knowledge/produkte/                  @dein-produkt-team
+/knowledge/glossar/                   @dein-team-lead
+
+# Kunden- und Projektvorgänge
+/knowledge/kunden/                    @dein-projekt-team
+/knowledge/projekte/                  @dein-projekt-team
+/knowledge/konzepte/                  @dein-projekt-team
+/knowledge/dokumentation/             @dein-projekt-team
+/knowledge/protokolle/                @dein-projekt-team
+/knowledge/aenderungen/               @dein-projekt-team
+
+# Vertrags- und Finanzvorgänge
+/knowledge/angebote/                  @dein-finanz-team
+/knowledge/auftragsbestaetigungen/    @dein-finanz-team
+/knowledge/abnahmen/                  @dein-finanz-team
+/knowledge/abrechnung/                @dein-finanz-team
+/knowledge/service/                   @dein-finanz-team
+
+# Geheimdaten und Verschlüsselungsregeln — engster Kreis
+/knowledge/secrets/                   @dein-security-lead
+/.sops.yaml                           @dein-security-lead
+
+# Dokumentvorlagen und Stammdaten wirken auf jede erzeugte PDF
+/documents/templates/                 @dein-ops-team
+/documents/_data/                     @dein-ops-team

@@ -26,11 +26,13 @@ Typst-Templates ohne Sonderfälle arbeiten.
 Prüfe nach jeder Änderung alle Dateien gegen die Referenzstruktur:
 
 ```bash
-for file in documents/_data/locales/*.json; do
-  jq -e 'keys == ["client", "contact", "date", "project", "status"] and
-    (.[] | type == "string" and length > 0)' "$file" >/dev/null || exit 1
-done
+./scripts/check-locales.sh
 ```
+
+Das Skript liest den erwarteten Schlüsselsatz aus `de.json`, statt ihn zu
+wiederholen — eine hartkodierte Liste wird still falsch, sobald jemand einen
+Schlüssel ergänzt. Es meldet abweichende Schlüssel, leere Werte und ungültiges
+JSON und läuft auch in der GitHub Action.
 
 Wenn die geänderte Sprache in einer Quelle verwendet wird, kompiliere diese
 Quelle anschließend mit `typstgen compile <quelle.typ> --config typstgen.toml`.
