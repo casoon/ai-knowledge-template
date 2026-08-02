@@ -1,0 +1,15 @@
+{
+  "id": "CAS-ANG-2026-001",
+  "date": "16.07.2026",
+  "valid_until": "16.08.2026",
+  "payment_terms": "40 % bei Beauftragung, 40 % nach Designfreigabe, 20 % nach Abnahme.",
+  "items": [
+    {"title": "Strategie und Informationsarchitektur", "description": "Ziele, Zielgruppen, Seitenstruktur und Conversion-Pfade", "quantity": "1 Pauschale", "amount": "1.250,00 EUR"},
+    {"title": "Design und Komponenten", "description": "Gestaltungsrichtung, Startseite und wiederverwendbare Seitentypen", "quantity": "1 Pauschale", "amount": "1.800,00 EUR"},
+    {"title": "Technische Umsetzung", "description": "Responsive Umsetzung, CMS-Anbindung und Qualitätsprüfung", "quantity": "1 Pauschale", "amount": "3.450,00 EUR"},
+    {"title": "Redaktionelle Übergabe", "description": "Einweisung und kompakte Betriebsdokumentation", "quantity": "1 Pauschale", "amount": "650,00 EUR"}
+  ],
+  "net_total": "7.150,00 EUR",
+  "vat": "1.358,50 EUR",
+  "gross_total": "8.508,50 EUR"
+}

@@ -7,25 +7,35 @@ Ein GitHub-Template-Repository für eine Wissensbasis, mit der KI-Systeme (Chats
 1. Oben rechts auf **"Use this template"** klicken, um ein eigenes (privates) Repository daraus zu erzeugen.
 2. Die Beispieleinträge in `knowledge/` ansehen — sie zeigen das Muster (Frontmatter, Prüfdatum, Status, Verlinkung, Nachfolge-Beziehungen, öffentlich/privat) an echten, untereinander verlinkten Beispielen.
 3. Mit `./scripts/search.sh <begriff>` durch die Beispiele suchen — einfache Volltextsuche, bevor über einen Vektorindex nachgedacht wird.
-4. Mit [`knowledge-lint`](https://github.com/casoon/knowledge-lint) prüfen und aufräumen (siehe unten).
-5. Eigene Kategorien in `knowledge/_types.yml` ergänzen (z. B. `customers/`, `projects/`, `meetings/`) — kein Code-Change nötig.
-6. Beispielinhalte entfernen, sobald die eigene Struktur klar ist:
+4. Mit [`knowledge-lint`](https://github.com/casoon/knowledge-lint) prüfen (siehe unten).
+5. Eigene Kategorien in `knowledge/_types.yml` ergänzen (z. B. `meetings/`, `vertraege/`) — kein Code-Change nötig.
+6. **[`SETUP.md`](SETUP.md) abarbeiten**, bevor echte Daten hineinkommen. Dort steht als Checkliste, was ein abgeleitetes Repository ersetzen muss: eigener Age-Schlüssel, Firmenstammdaten, CODEOWNERS-Handles, Governance-Platzhalter, Lizenz, Site-Identität — und wie die Beispielinhalte entfernt werden.
 
-   ```bash
-   knowledge-lint clean knowledge
-   ```
+Für den letzten Punkt gibt es zwei Kommandos, weil sie verschiedene Bereiche betreffen:
 
-   Entfernt alle Beispiel-Einträge, setzt `_attachments.yml` zurück und lässt die Ordnerstruktur sowie `knowledge/_template.md` als Vorlage stehen.
+```bash
+knowledge-lint clean knowledge   # Beispiel-Einträge in knowledge/
+./scripts/clean-demo.sh --yes    # Typst-Demos und demo-*.json in documents/
+```
+
+`knowledge-lint clean` entfernt alle Beispiel-Einträge, setzt `_attachments.yml` zurück und lässt Ordnerstruktur und `knowledge/_template.md` als Vorlage stehen. Es fragt nicht nach und ist nicht rückgängig zu machen — nur direkt nach der Ableitung ausführen, nie in einer befüllten Wissensbasis. `clean-demo.sh` läuft ohne `--yes` als Trockenlauf.
 
 ## Struktur
 
 ```
 ai-knowledge-template/
 ├── README.md
-├── LICENSE
+├── SETUP.md                   (Checkliste nach "Use this template")
+├── CLAUDE.md                  (Projektkontext für Coding-Agenten)
 ├── GOVERNANCE.md
+├── LICENSE
 ├── .sops.yaml
 ├── typstgen.toml
+├── .claude/
+│   └── skills/                (Arbeitsabläufe für Coding-Agenten)
+│       ├── document-workflow/
+│       ├── locale-maintenance/
+│       └── knowledge-document-link/
 ├── .github/
 │   ├── CODEOWNERS
 │   ├── PULL_REQUEST_TEMPLATE.md
@@ -44,6 +54,8 @@ ai-knowledge-template/
 │   ├── kunden/
 │   ├── projekte/
 │   ├── angebote/
+│   ├── konzepte/
+│   ├── dokumentation/
 │   ├── auftragsbestaetigungen/
 │   ├── protokolle/
 │   ├── aenderungen/
@@ -54,15 +66,14 @@ ai-knowledge-template/
 │   └── example-assets/
 ├── site/                      (optional: Astro Starlight, nur public:true)
 ├── documents/                 (geschlossene Typst-Wurzel, PDFs werden nicht committed)
-│   ├── _data/                 (Stammdaten und Übersetzungen)
+│   ├── _data/                 (company.json, demo-*.json, locales/)
 │   ├── templates/
-│   └── …
-├── skills/                    (Arbeitsabläufe für Coding-Agenten)
-│   ├── document-workflow/
-│   ├── locale-maintenance/
-│   └── knowledge-document-link/
+│   ├── offers/ order-confirmations/ protocols/
+│   ├── concepts/ acceptance/ invoices/
+│   └── documentation/ service/
 └── scripts/
-    └── search.sh
+    ├── search.sh
+    └── clean-demo.sh
 ```
 
 Validiert wird mit [`knowledge-lint`](https://github.com/casoon/knowledge-lint) — einem eigenständigen Rust-Tool (kein Teil dieses Repos, `cargo install --git https://github.com/casoon/knowledge-lint`), damit es auch für andere Wissensbasen mit derselben `_types.yml`-Konvention nutzbar bleibt.
@@ -83,16 +94,25 @@ Die zusätzlichen Beispielkategorien zeigen einen vollständigen, fiktiven Ablau
 
 Der Wissensstatus (`status: aktuell | veraltet`) und der Geschäftsstatus eines Dokuments (`document_status`, z. B. `sent`, `accepted`, `paid`) sind getrennt: Eine versandte Rechnung kann als Wissenseintrag weiterhin aktuell sein. `typst_source` ist der vorgesehene Anker für ein privates `typstgen`, das PDF-Ausgaben bei Bedarf generiert. Die PDFs selbst gehören nicht in den RAG-Index.
 
-Unter `documents/` liegen dafür sechs zusammenhängende Typst-Demos (Angebot, Auftragsbestätigung, Protokoll, Abnahme, Rechnung und Servicevereinbarung). Templates, Demo-Stammdaten und Übersetzungen sind dort als echte Dateien abgelegt; sie werden über `typstgen compile <quelle> --config typstgen.toml` direkt zu PDFs. Details stehen in [`documents/README.md`](documents/README.md).
+Unter `documents/` liegen dafür acht zusammenhängende Typst-Demos (Angebot, Auftragsbestätigung, Protokoll, Konzept, Abnahme, Rechnung, Betriebsdokumentation und Servicevereinbarung). Templates, Demo-Stammdaten und Übersetzungen sind dort als echte Dateien abgelegt; sie werden über `typstgen compile <quelle> --config typstgen.toml` direkt zu PDFs (`cargo install typstgen`). Details stehen in [`documents/README.md`](documents/README.md).
+
+Der Änderungsantrag im Ablauf hat bewusst keine Typst-Quelle. Er zeigt den Normalfall: Nicht jeder Vorgang braucht ein PDF, oft reicht der Wissenseintrag.
+
+`konzepte/` und `dokumentation/` zeigen den Unterschied zwischen beiden Ebenen am deutlichsten. Die Typst-Quelle ist die ausführliche, kundenfähige Fassung mit Tabellen, Meilensteinen und Prozessbeschreibung; der Wissenseintrag daneben ist die kompakte, maschinenlesbare Zusammenfassung derselben Sache. Ein RAG-System liest den Eintrag, der Kunde bekommt das PDF.
 
 Für einen privaten Klon, der sensible Kunden-, Angebots- oder Rechnungsdaten enthält, ist `classification` (`internal`, `confidential`, `secret`) eine Abrufvorgabe. Sie muss durch die Retrieval- und Berechtigungsschicht erzwungen werden; Frontmatter allein schützt keine Daten.
 
-### `skills/` — wiederholbare Agenten-Abläufe
+### `.claude/skills/` — wiederholbare Agenten-Abläufe
 
 Die drei lokalen Skills beschreiben den PDF-Workflow, die Pflege der acht
 Locale-Dateien und die Konsistenz zwischen Wissens- und Typst-Dokumenten. Sie
 ergänzen die vorhandenen Dateien und Validierer; sie sind keine Quelle für
 Kunden- oder Projektdaten.
+
+Sie liegen unter `.claude/skills/`, damit Claude Code sie ohne weitere
+Konfiguration findet. `CLAUDE.md` im Wurzelverzeichnis hält daneben die Regeln
+fest, die für jede Änderung gelten — etwa dass `public: false` der Standard ist
+und PDFs nicht committet werden.
 
 ### Validierung und Pflege: [`knowledge-lint`](https://github.com/casoon/knowledge-lint)
 
@@ -106,7 +126,11 @@ knowledge-lint lint knowledge
 knowledge-lint clean knowledge
 ```
 
-`lint` prüft: Frontmatter-Vollständigkeit, gültige `status`-Werte, `type`-Konsistenz mit der Kategorie, auflösbare `related`-Verweise, überfällige `last_reviewed`-Daten (Schwelle aus `_types.yml`), dass jede Datei in `secrets/` tatsächlich SOPS-verschlüsselt ist, einen Klartext-Secret-Scan über den Rest der Wissensbasis, große Dateien (Warnung, `_attachments.yml` nutzen), und dass jeder Eintrag in `_attachments.yml` noch existiert (lokale Pfade werden geprüft, http(s)-URLs per HEAD-Request, Netzlaufwerk-Schemata übersprungen). Exit-Code 1 bei Fehlern, läuft automatisch als GitHub Action auf jeder Pull Request, die `knowledge/**` ändert.
+`lint` prüft: Frontmatter-Vollständigkeit, gültige `status`-Werte, `type`-Konsistenz mit der Kategorie, auflösbare `related`-Verweise, überfällige `last_reviewed`-Daten (Schwelle aus `_types.yml`), dass jede Datei in `secrets/` tatsächlich SOPS-verschlüsselt ist, einen Klartext-Secret-Scan über den Rest der Wissensbasis, große Dateien (Warnung, `_attachments.yml` nutzen), und dass jeder Eintrag in `_attachments.yml` noch existiert (lokale Pfade werden geprüft, http(s)-URLs per HEAD-Request, Netzlaufwerk-Schemata übersprungen). Exit-Code 1 bei Fehlern.
+
+Die GitHub Action in `.github/workflows/lint.yml` läuft bei Pull Requests **und** bei direkten Pushes auf den Standardbranch — in einem privaten Repository mit einer Person entstehen die meisten Einträge ohne PR, und ein Lint, der dort nie läuft, ist keiner. `knowledge-lint` ist dort auf einen Commit gepinnt und wird gecacht, damit eine Änderung am Tool nicht gleichzeitig alle abgeleiteten Repositories rot färbt. Zusätzlich prüft `./scripts/check-locales.sh`, dass alle acht Locale-Dateien denselben Schlüsselsatz haben wie `de.json`.
+
+Was `knowledge-lint` bewusst **nicht** prüft: gegen welchen Schlüssel eine Datei unter `secrets/` verschlüsselt ist. Dafür sorgt der Platzhalter in `.sops.yaml` (siehe [`SETUP.md`](SETUP.md)).
 
 ### `site/` — optionale Präsentationsschicht (Astro Starlight)
 
@@ -137,9 +161,8 @@ Jeder Beispieleintrag demonstriert eine konkrete Praxis, und die Einträge verli
 - `knowledge/prozesse/eintrag-review.md` beschreibt den Prozess, der die anderen Beispiele konsistent hält.
 - `knowledge/glossar/rag.md`, `chunking.md` und `vektorindex.md` bilden ein kleines verlinktes Glossar, alle drei `public: true` — deshalb erscheinen genau diese drei in `site/`, wenn es gebaut wird.
 - `knowledge/secrets/beispiel-credential.yaml` ist echt SOPS-verschlüsselt (nicht simuliert), aber mit einem Demo-Schlüssel, dessen privater Teil nirgends im Repo existiert — für niemanden entschlüsselbar, rein zur Strukturdemonstration.
-- Die neuen Einträge unter `kunden/`, `projekte/`, `angebote/`, `auftragsbestaetigungen/`, `protokolle/`, `aenderungen/`, `abnahmen/`, `abrechnung/` und `service/` bilden einen durchgängigen Freelancer-Vorgang ab. Sie zeigen, wie ein RAG-System Projekt- und Geschäftskontext nutzen kann, ohne auf generierte PDFs angewiesen zu sein.
-
-Der Hintergrund dazu steht in einem begleitenden Artikel auf insights.casoon.de (folgt in Kürze).
+- `knowledge/prozesse/kunden-onboarding.md` zeigt, wie ein wiederkehrender Ablauf einmal festgehalten wird, statt in jedem Projekt neu erfunden zu werden — und verweist auf die Vorgangs-Kategorien, die er auslöst.
+- Die Einträge unter `kunden/`, `projekte/`, `angebote/`, `konzepte/`, `auftragsbestaetigungen/`, `protokolle/`, `aenderungen/`, `abnahmen/`, `abrechnung/`, `dokumentation/` und `service/` bilden einen durchgängigen Freelancer-Vorgang ab. Sie zeigen, wie ein RAG-System Projekt- und Geschäftskontext nutzen kann, ohne auf generierte PDFs angewiesen zu sein.
 
 ## Lizenz
 

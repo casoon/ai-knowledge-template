@@ -1,0 +1,28 @@
+{
+  "client": {
+    "company": "Muster & Partner GmbH (Demo)",
+    "contact": "Lea Hartmann",
+    "email": "lea.hartmann@muster-partner.example",
+    "location": "Hamburg"
+  },
+  "project": {
+    "id": "P-2026-001",
+    "name": "Website-Relaunch",
+    "goal": "Leistungen klarer erklären und qualifizierte Anfragen ermöglichen.",
+    "start": "20.07.2026",
+    "target_launch": "30.09.2026",
+    "editorial_owner": "Muster & Partner GmbH",
+    "technical_owner": "Musterstudio Digital GmbH"
+  },
+  "milestones": [
+    {"name": "Informationsarchitektur", "date": "31.07.2026", "result": "Freigegebene Seitenstruktur"},
+    {"name": "Designrichtung", "date": "14.08.2026", "result": "Freigegebene Startseite"},
+    {"name": "Umsetzung und Inhalte", "date": "11.09.2026", "result": "Prüfbare Vorschau"},
+    {"name": "Abnahme und Launch", "date": "30.09.2026", "result": "Veröffentlichte Website"}
+  ],
+  "decisions": [
+    "Die Startseite benennt Zielgruppe, Nutzen und Kontaktweg im ersten sichtbaren Bereich.",
+    "Die Leistungen erhalten jeweils eine eigene, suchmaschinenfähige Seite.",
+    "Referenzen werden als eigenständiger Bereich mit kurzer Ausgangslage und Ergebnis angelegt."
+  ]
+}

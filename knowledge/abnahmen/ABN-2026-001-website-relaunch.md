@@ -5,7 +5,7 @@ created: 2026-08-01
 last_reviewed: 2026-08-01
 status: aktuell
 source: "Fiktive Abnahme für dieses Template"
-related: ["../projekte/website-relaunch-muster-und-partner.md", "../aenderungen/CR-2026-001-referenzbereich.md", "../abrechnung/RE-2026-001-website-relaunch.md", "../service/SRV-2026-001-website-wartung.md"]
+related: ["../projekte/website-relaunch-muster-und-partner.md", "../aenderungen/CR-2026-001-referenzbereich.md", "../abrechnung/RE-2026-001-website-relaunch.md", "../service/SRV-2026-001-website-wartung.md", "../dokumentation/CAS-DOC-2026-001-redaktion-und-betrieb.md"]
 public: false
 classification: confidential
 document_id: ABN-2026-001

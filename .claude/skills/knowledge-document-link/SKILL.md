@@ -15,7 +15,10 @@ aber keine PDF-Datei als Wissensquelle duplizieren.
 2. Prüfe, dass `document_id` im Frontmatter mit `document_id` in der Typst-
    Quelle übereinstimmt.
 3. Prüfe, dass `typst_source` auf die existierende Quelle unter `documents/`
-   zeigt. Verwende einen relativen Repository-Pfad.
+   zeigt. Verwende einen relativen Repository-Pfad. Nicht jeder Vorgang braucht
+   ein PDF: Ein Eintrag darf eine `document_id` ohne `typst_source` haben
+   (Beispiel: `knowledge/aenderungen/CR-2026-001-referenzbereich.md`). Ein
+   `typst_source` ohne passende Datei ist dagegen immer ein Fehler.
 4. Prüfe die fachlichen Verbindungen (`related`): Kunde, Projekt und
    Vorgängerdokumente sollen auflösbar sein.
 5. Ändere bei Umbenennungen beide Seiten in einem Zug und suche anschließend

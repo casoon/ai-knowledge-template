@@ -1,17 +1,30 @@
-# SOPS-Verschlüsselungsregeln. Der Age-Public-Key unten ist ein DEMO-Schlüssel,
-# nur zur Verschlüsselung von knowledge/secrets/beispiel-credential.yaml in
-# diesem Template. Der zugehörige private Schlüssel ist nirgends in diesem
-# Repository enthalten und wurde nach der Erstellung verworfen — dieser
-# Beispiel-Eintrag ist also für niemanden entschlüsselbar, auch nicht für uns.
+# SOPS-Verschlüsselungsregeln.
 #
-# Vor echtem Gebrauch: eigenes Schlüsselpaar erzeugen und den Public Key
-# unten ersetzen.
+# Regeln werden der Reihe nach geprüft, die erste passende gewinnt.
+#
+# Regel 1 gilt ausschließlich für die eine Beispieldatei dieses Templates. Ihr
+# Age-Public-Key ist ein DEMO-Schlüssel; der zugehörige private Schlüssel ist
+# nirgends in diesem Repository enthalten und wurde nach der Erstellung
+# verworfen. Die Beispieldatei ist damit für niemanden entschlüsselbar, auch
+# nicht für uns — sie zeigt nur die Struktur.
+#
+# Regel 2 gilt für alle anderen Secrets und enthält bewusst einen ungültigen
+# Platzhalter statt des Demo-Schlüssels. Solange er nicht ersetzt ist, bricht
+# `sops -e` mit einem Fehler ab. Das ist Absicht: mit dem Demo-Schlüssel würde
+# ein echtes Secret erfolgreich, aber unwiederbringlich verschlüsselt, und
+# `knowledge-lint` würde das nicht bemerken — es prüft nur, DASS eine Datei
+# verschlüsselt ist, nicht FÜR WEN.
+#
+# Vor dem ersten echten Secret: eigenes Schlüsselpaar erzeugen und den
+# Platzhalter in Regel 2 durch den eigenen Public Key ersetzen.
 #
 #   age-keygen -o ~/.config/sops/age/keys.txt
 #
 # Der private Schlüssel bleibt lokal (z. B. über SOPS_AGE_KEY_FILE), niemals
-# im Repository.
+# im Repository. Siehe SETUP.md und GOVERNANCE.md.
 
 creation_rules:
-  - path_regex: knowledge/secrets/.*\.yaml$
+  - path_regex: ^knowledge/secrets/beispiel-credential\.yaml$
     age: age1gdhu3v7rs5zut2fmyesv8cwfzkpjzgrf00htn9w20jqsraxj29jqz953c2
+  - path_regex: knowledge/secrets/.*\.yaml$
+    age: PLATZHALTER_EIGENEN_AGE_PUBLIC_KEY_EINTRAGEN

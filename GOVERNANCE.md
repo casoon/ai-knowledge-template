@@ -4,7 +4,16 @@ Kurze, tatsächlich befolgte Regeln statt Bürokratie.
 
 ## Wer darf schreiben
 
-[Anpassen: z. B. Teammitglieder mit Domänenwissen zum jeweiligen Bereich. Neue Einträge per Pull Request, Review durch eine zweite Person, bevor sie in `knowledge/` landen.] Die Zuständigkeit pro Ordner lässt sich technisch über [`.github/CODEOWNERS`](.github/CODEOWNERS) erzwingen, statt nur dokumentiert zu sein — dort sind Platzhalter hinterlegt, die durch echte GitHub-Handles ersetzt werden müssen.
+[Anpassen: z. B. Teammitglieder mit Domänenwissen zum jeweiligen Bereich. Neue Einträge per Pull Request, Review durch eine zweite Person, bevor sie in `knowledge/` landen.]
+
+Die Vorlage unterscheidet vier Zuständigkeitsbereiche, weil sie unterschiedlich sensibel sind:
+
+- **Allgemeines Wissen** (`entscheidungen/`, `prozesse/`, `produkte/`, `glossar/`) — breiter Schreibzugriff, Review durch eine zweite Person.
+- **Kunden- und Projektvorgänge** (`kunden/`, `projekte/`, `konzepte/`, `dokumentation/`, `protokolle/`, `aenderungen/`) — nur Personen mit Mandat im jeweiligen Projekt.
+- **Vertrags- und Finanzvorgänge** (`angebote/`, `auftragsbestaetigungen/`, `abnahmen/`, `abrechnung/`, `service/`) — nur Personen mit kaufmännischer Verantwortung.
+- **Geheimdaten** (`secrets/`, `.sops.yaml`) — engster Kreis; wer `.sops.yaml` ändern kann, bestimmt, wer künftige Secrets lesen kann.
+
+Die Zuständigkeit pro Ordner lässt sich technisch über [`.github/CODEOWNERS`](.github/CODEOWNERS) erzwingen, statt nur dokumentiert zu sein — dort sind Platzhalter für alle vier Bereiche hinterlegt, die durch echte GitHub-Handles ersetzt werden müssen. CODEOWNERS wirkt allerdings nur zusammen mit einer Review-Pflicht auf dem Standardbranch; ohne Branch-Schutz bleibt es eine Dokumentation.
 
 ## Wer darf lesen
 
@@ -34,7 +43,9 @@ Wenn strukturierte Geheimdaten trotzdem versioniert werden müssen (z. B. eine K
 # einmalig: eigenes Schlüsselpaar erzeugen, NIE ins Repo committen
 age-keygen -o ~/.config/sops/age/keys.txt
 
-# Public Key aus der Ausgabe in .sops.yaml eintragen (den Demo-Key ersetzen)
+# Public Key aus der Ausgabe in .sops.yaml eintragen und dort den Platzhalter
+# in der zweiten creation_rule ersetzen. Solange er steht, bricht `sops -e`
+# ab — Absicht, damit kein echtes Secret gegen den Demo-Key verschlüsselt wird.
 
 # neue Datei verschlüsseln
 sops -e -i knowledge/secrets/neue-datei.yaml
@@ -48,7 +59,16 @@ sops -d knowledge/secrets/neue-datei.yaml
 
 ## Prüfintervall
 
-[Anpassen: z. B. Einträge unter `produkte/` und `prozesse/` werden vierteljährlich geprüft. `entscheidungen/` bleibt als Historie unverändert stehen und wird bei Bedarf durch einen neuen Eintrag ergänzt statt überschrieben. `glossar/` wird bei Bedarf aktualisiert.] `knowledge/_types.yml` legt pro Kategorie ein `review_interval_days` fest, gegen das [`knowledge-lint`](https://github.com/casoon/knowledge-lint) prüft — der Wert dort sollte dem hier festgelegten Intervall entsprechen, nicht umgekehrt.
+[Anpassen: z. B. Einträge unter `produkte/` und `prozesse/` werden vierteljährlich geprüft. `entscheidungen/` bleibt als Historie unverändert stehen und wird bei Bedarf durch einen neuen Eintrag ergänzt statt überschrieben. `glossar/` wird bei Bedarf aktualisiert.]
+
+Für die Vorgangs-Kategorien richtet sich das Intervall nach der Halbwertszeit der Information, nicht nach ihrer Wichtigkeit:
+
+- **Laufende Vorgänge** (`projekte/`, `angebote/`) ändern sich wöchentlich — kurzes Intervall, sonst steht schnell etwas Falsches im Kontext.
+- **Aktive Beziehungen** (`kunden/`, `protokolle/`, `aenderungen/`, `service/`) werden vierteljährlich geprüft.
+- **Abgeschlossene Vorgänge** (`auftragsbestaetigungen/`, `abnahmen/`, `abrechnung/`) sind Historie und werden jährlich nur noch auf Auffindbarkeit geprüft, nicht inhaltlich fortgeschrieben.
+- **Projektartefakte** (`konzepte/`, `dokumentation/`) gelten für die Dauer des Projekts und werden halbjährlich gegen den tatsächlichen Stand geprüft — veraltete Betriebsdokumentation ist gefährlicher als gar keine.
+
+`knowledge/_types.yml` legt pro Kategorie ein `review_interval_days` fest, gegen das [`knowledge-lint`](https://github.com/casoon/knowledge-lint) prüft — der Wert dort sollte dem hier festgelegten Intervall entsprechen, nicht umgekehrt.
 
 ## Fehler melden
 
