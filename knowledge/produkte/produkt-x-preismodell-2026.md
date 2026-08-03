@@ -6,6 +6,7 @@ last_reviewed: 2026-08-02
 status: aktuell
 source: "Preisliste 2026"
 related: ["./produkt-x-preismodell.md"]
+sphere: geschaeftlich
 ---
 
 ## Inhalt

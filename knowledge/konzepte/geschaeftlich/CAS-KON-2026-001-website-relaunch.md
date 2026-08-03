@@ -5,8 +5,9 @@ created: 2026-07-31
 last_reviewed: 2026-08-02
 status: aktuell
 source: "Fiktives Konzept für dieses Template"
-related: ["../kunden/muster-und-partner.md", "../projekte/website-relaunch-muster-und-partner.md", "../protokolle/2026-07-22-kickoff-website-relaunch.md", "../dokumentation/CAS-DOC-2026-001-redaktion-und-betrieb.md"]
+related: ["../../kunden/muster-und-partner.md", "../../projekte/website-relaunch-muster-und-partner.md", "../../protokolle/2026-07-22-kickoff-website-relaunch.md", "../../dokumentation/geschaeftlich/CAS-DOC-2026-001-redaktion-und-betrieb.md"]
 public: false
+sphere: geschaeftlich
 classification: confidential
 document_id: CAS-KON-2026-001
 document_status: accepted

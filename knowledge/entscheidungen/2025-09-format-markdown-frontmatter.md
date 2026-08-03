@@ -6,6 +6,7 @@ last_reviewed: 2026-01-15
 status: aktuell
 source: "Team-Retro, 2025-09-04"
 related: ["../prozesse/eintrag-review.md"]
+sphere: geschaeftlich
 ---
 
 ## Kontext

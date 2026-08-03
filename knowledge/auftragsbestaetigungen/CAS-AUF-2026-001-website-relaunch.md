@@ -7,6 +7,7 @@ status: aktuell
 source: "Fiktive Auftragsbestätigung für dieses Template"
 related: ["../angebote/CAS-ANG-2026-001-website-relaunch.md", "../projekte/website-relaunch-muster-und-partner.md", "../protokolle/2026-07-22-kickoff-website-relaunch.md"]
 public: false
+sphere: geschaeftlich
 classification: confidential
 document_id: CAS-AUF-2026-001
 document_status: accepted

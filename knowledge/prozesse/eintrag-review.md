@@ -6,6 +6,7 @@ last_reviewed: 2026-02-01
 status: aktuell
 source: "Internes Playbook, Team Ops"
 related: ["../entscheidungen/2025-09-format-markdown-frontmatter.md"]
+sphere: geschaeftlich
 ---
 
 ## Ablauf für neue Einträge

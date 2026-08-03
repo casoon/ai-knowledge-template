@@ -7,6 +7,7 @@ status: aktuell
 source: "Fiktives Kickoff-Gespräch für dieses Template"
 related: ["../projekte/website-relaunch-muster-und-partner.md", "../auftragsbestaetigungen/CAS-AUF-2026-001-website-relaunch.md", "../aenderungen/CR-2026-001-referenzbereich.md"]
 public: false
+sphere: geschaeftlich
 classification: confidential
 document_id: CAS-PRO-2026-001
 document_status: delivered

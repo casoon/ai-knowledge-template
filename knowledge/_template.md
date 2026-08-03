@@ -7,6 +7,7 @@ status: aktuell
 source: ""
 related: []
 public: false # true = wird von site/ als Starlight-Doku veröffentlicht
+sphere: geschaeftlich # geschaeftlich | privat — trennt Arbeit von Privatem
 # Optional bei Kunden- und Prozessartefakten:
 # classification: internal | confidential | secret
 # document_id: "" # stabile ID für Typst-Quelle und on-demand PDF

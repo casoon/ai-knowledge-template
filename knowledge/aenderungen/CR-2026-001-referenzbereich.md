@@ -7,6 +7,7 @@ status: aktuell
 source: "Fiktive Kundenanforderung aus dem Kickoff-Protokoll"
 related: ["../protokolle/2026-07-22-kickoff-website-relaunch.md", "../projekte/website-relaunch-muster-und-partner.md", "../abnahmen/ABN-2026-001-website-relaunch.md"]
 public: false
+sphere: geschaeftlich
 classification: confidential
 document_id: CR-2026-001
 document_status: accepted

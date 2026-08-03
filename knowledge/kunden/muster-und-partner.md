@@ -7,6 +7,7 @@ status: aktuell
 source: "Fiktive CRM-Stammdaten für dieses Template"
 related: ["../projekte/website-relaunch-muster-und-partner.md"]
 public: false
+sphere: geschaeftlich
 classification: confidential
 client_id: K-2026-001
 ---

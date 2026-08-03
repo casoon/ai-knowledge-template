@@ -49,6 +49,11 @@ Demo-Schlüssel, und Demo-Firmendaten stehen in echten Kundendokumenten.
 - [ ] **`knowledge/_types.yml`** — eigene Kategorien ergänzen oder nicht benötigte
       entfernen. Die `review_interval_days` sollten dem entsprechen, was in
       `GOVERNANCE.md` steht.
+- [ ] **Sphären-Trennung** entscheiden. Jeder Eintrag trägt
+      `sphere: geschaeftlich | privat`, `konzepte/` und `dokumentation/` haben
+      dafür Unterordner. Wer ausschließlich betrieblich arbeitet, lässt die
+      `privat/`-Ordner leer und den Wert auf `geschaeftlich` — löschen sollte man
+      sie erst, wenn wirklich klar ist, dass nie Privates dazukommt.
 - [ ] **Branch-Schutz**, falls mit mehreren Personen gearbeitet wird. CODEOWNERS
       wirkt nur zusammen mit einer Review-Pflicht auf dem Standardbranch.
 

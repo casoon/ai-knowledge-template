@@ -6,6 +6,7 @@ last_reviewed: 2026-06-01
 status: aktuell
 source: "Internes Playbook, Team Ops"
 related: []
+sphere: geschaeftlich
 ---
 
 ## Ablauf

@@ -52,6 +52,21 @@ Eine Ausnahme ist erwähnenswert, weil sie oft übersehen wird: Die *Bindung* an
 
 Außerdem nicht hierher: personenbezogene Daten, vertrauliche Verträge, interne Bewertungen einzelner Personen. Im Zweifel nicht aufnehmen, sondern separat und zugriffsbeschränkt verwalten.
 
+## Geschäftlich und privat
+
+Jeder Eintrag trägt `sphere: geschaeftlich | privat`. In Kategorien, in denen beides vorkommt — hier `konzepte/` und `dokumentation/` — entspricht dem zusätzlich ein Unterordner:
+
+```
+knowledge/konzepte/geschaeftlich/CAS-KON-2026-001-website-relaunch.md
+knowledge/konzepte/privat/2026-08-heimnetz-neuaufbau.md
+```
+
+Doppelt, weil beides gebraucht wird: Das Feld erlaubt einer Retrieval-Schicht das Filtern ohne Pfad-Parsing und gilt auch in den flachen Kategorien; der Pfad macht die Trennung beim Durchsehen sichtbar und erlaubt ein grobes `**/privat/**`-Muster.
+
+Der Grund ist praktisch, nicht formal. Wer eine Wissensbasis über Jahre führt, sammelt darin früher oder später auch Privates — Bauvorhaben, Gesundheitsrecherchen, Familienthemen. Ohne Trennung liegt das im selben Index wie die Kundenarbeit: Eine Frage zum Kundenprojekt zieht es in den Kontext, und ein an einen Kunden gerichteter Auszug kann es enthalten.
+
+Private Einträge sind nie `public: true` und verweisen nicht auf Kundeneinträge. Wer ausschließlich betrieblich arbeitet, lässt `sphere` auf `geschaeftlich` stehen und die `privat/`-Ordner leer — der Aufwand ist ein Frontmatter-Feld, der Nutzen zeigt sich beim ersten privaten Eintrag.
+
 ## Wie ein Eintrag altert
 
 Entscheidungen sammeln sich nicht an, sie werden abgelöst. Ein überholter Eintrag wird nicht überschrieben, sondern bekommt `status: veraltet` und einen `related`-Verweis auf seinen Nachfolger. Das erhält die Frage "warum haben wir das damals anders entschieden?" — oft die eigentlich interessante.

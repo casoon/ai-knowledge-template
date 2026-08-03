@@ -30,6 +30,17 @@ begründete Entscheidung stößt, gehört sie zusätzlich als eigener Eintrag na
 `entscheidungen/`, nicht nur als Satz in der Zusammenfassung. Sonst ist sie
 gespeichert, aber nicht auffindbar.
 
+## Geschäftlich und privat
+
+Jeder Eintrag trägt `sphere: geschaeftlich | privat`. In `konzepte/` und
+`dokumentation/` — den Kategorien, in denen beides vorkommt — muss der Wert zum
+Unterordner passen: `privat` liegt unter `privat/`, sonst unter
+`geschaeftlich/`. Alle anderen Kategorien sind ihrer Natur nach geschäftlich
+und bleiben flach.
+
+Ein privater Eintrag verweist nie auf einen Kundeneintrag und wird nie
+`public: true`.
+
 ## Regeln
 
 - Standard ist `public: false`. Ein Eintrag wird aktiv freigegeben, nie

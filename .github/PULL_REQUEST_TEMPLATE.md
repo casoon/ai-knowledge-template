@@ -13,6 +13,7 @@
 ## Sichtbarkeit und Schutzklasse
 
 - [ ] `public` bewusst gesetzt. `public: true` veröffentlicht den Eintrag über `site/` — bei Kunden-, Angebots- oder Rechnungsinhalten bleibt es bei `false`.
+- [ ] `sphere` gesetzt und passend zum Ablageort. In `konzepte/` und `dokumentation/` muss der Wert zum Unterordner passen; private Einträge verweisen nicht auf Kundeneinträge.
 - [ ] `classification` gesetzt, falls der Eintrag Kunden-, Vertrags- oder Zugangsbezug hat (`internal`, `confidential`, `secret`).
 - [ ] Keine Zugangsdaten im Klartext — stattdessen `vault://`-Verweis oder verschlüsselter Eintrag unter `knowledge/secrets/`.
 

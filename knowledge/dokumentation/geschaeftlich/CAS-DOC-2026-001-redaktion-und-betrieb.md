@@ -5,8 +5,9 @@ created: 2026-08-01
 last_reviewed: 2026-08-02
 status: aktuell
 source: "Fiktive Betriebsdokumentation für dieses Template"
-related: ["../projekte/website-relaunch-muster-und-partner.md", "../konzepte/CAS-KON-2026-001-website-relaunch.md", "../abnahmen/ABN-2026-001-website-relaunch.md", "../service/SRV-2026-001-website-wartung.md"]
+related: ["../../projekte/website-relaunch-muster-und-partner.md", "../../konzepte/geschaeftlich/CAS-KON-2026-001-website-relaunch.md", "../../abnahmen/ABN-2026-001-website-relaunch.md", "../../service/SRV-2026-001-website-wartung.md"]
 public: false
+sphere: geschaeftlich
 classification: internal
 document_id: CAS-DOC-2026-001
 document_status: delivered

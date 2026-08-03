@@ -6,6 +6,7 @@ last_reviewed: 2025-03-01
 status: veraltet
 source: "Preisliste 2025, ersetzt durch Preisliste 2026"
 related: ["./produkt-x-preismodell-2026.md"]
+sphere: geschaeftlich
 ---
 
 ## Hinweis

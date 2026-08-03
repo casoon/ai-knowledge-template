@@ -7,6 +7,7 @@ status: aktuell
 source: "Festlegung des Teams"
 related: ["../entscheidungen/2026-01-tooling-wahl.md"]
 public: true
+sphere: geschaeftlich
 ---
 
 ## Zweck

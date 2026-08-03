@@ -7,6 +7,7 @@ status: aktuell
 source: "Fiktive Rechnungsdaten für dieses Template"
 related: ["../kunden/muster-und-partner.md", "../projekte/website-relaunch-muster-und-partner.md", "../abnahmen/ABN-2026-001-website-relaunch.md"]
 public: false
+sphere: geschaeftlich
 classification: confidential
 document_id: RE-2026-001
 document_status: sent

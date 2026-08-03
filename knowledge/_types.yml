@@ -11,6 +11,12 @@
 # status_values/active_status: Das Lint-Tool (github.com/casoon/knowledge-lint)
 # ist sprachunabhängig, Default ist Englisch (current/deprecated) — hier
 # explizit auf unser deutsches Vokabular festgelegt.
+#
+# Quer zu den Kategorien liegt `sphere: geschaeftlich | privat` im Frontmatter.
+# Kategorien, in denen beides vorkommt, bekommen zusätzlich die Unterordner
+# `geschaeftlich/` und `privat/` — hier `konzepte/` und `dokumentation/`. Alle
+# anderen sind ihrer Natur nach geschäftlich und bleiben flach. Siehe
+# GOVERNANCE.md.
 
 status_values: [aktuell, veraltet]
 active_status: aktuell

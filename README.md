@@ -51,11 +51,16 @@ ai-knowledge-template/
 │   ├── prozesse/
 │   ├── produkte/
 │   ├── glossar/
+│   ├── quellen/
 │   ├── kunden/
 │   ├── projekte/
 │   ├── angebote/
 │   ├── konzepte/
+│   │   ├── geschaeftlich/
+│   │   └── privat/
 │   ├── dokumentation/
+│   │   ├── geschaeftlich/
+│   │   └── privat/
 │   ├── auftragsbestaetigungen/
 │   ├── protokolle/
 │   ├── aenderungen/
@@ -162,6 +167,12 @@ Was hineingehört, sind die vier Bereiche, die kein Modell und keine Suchmaschin
 
 Am wertvollsten sind die Entscheidungen. Nicht "wie funktioniert Astro?", sondern "warum setzen wir hier statisches Rendering ein?" — solche Begründungen gehen sonst verloren und werden immer wieder neu getroffen. Achte auf die Balance: Kontext entsteht von selbst, weil jeder Vorgang Material erzeugt. Identität, Entscheidungen und Prozesse muss jemand aktiv aufschreiben. Eine Basis, die fast nur aus Vorgängen besteht, hat viel Inhalt und wenig Gedächtnis. Details in [`GOVERNANCE.md`](GOVERNANCE.md).
 
+### Geschäftlich und privat
+
+Jeder Eintrag trägt `sphere: geschaeftlich | privat`, und `konzepte/` wie `dokumentation/` haben dafür eigene Unterordner. Das Feld erlaubt einer Retrieval-Schicht das Filtern ohne Pfad-Parsing, der Pfad macht die Trennung beim Durchsehen sichtbar.
+
+Der Grund ist praktisch: Wer eine Wissensbasis über Jahre führt, sammelt darin auch Privates — Bauvorhaben, Gesundheitsrecherchen, Familienthemen. Ohne Trennung liegt das im selben Index wie die Kundenarbeit, und eine Frage zum Kundenprojekt zieht es in den Kontext. Wer ausschließlich betrieblich arbeitet, lässt `sphere` auf `geschaeftlich` und die `privat/`-Ordner leer; der Aufwand ist ein Frontmatter-Feld.
+
 ## Warum diese Struktur
 
 Jeder Beispieleintrag demonstriert eine konkrete Praxis, und die Einträge verlinken bewusst aufeinander statt isoliert zu stehen:
@@ -171,6 +182,7 @@ Jeder Beispieleintrag demonstriert eine konkrete Praxis, und die Einträge verli
 - `knowledge/prozesse/eintrag-review.md` beschreibt den Prozess, der die anderen Beispiele konsistent hält.
 - `knowledge/glossar/rag.md`, `chunking.md` und `vektorindex.md` bilden ein kleines verlinktes Glossar, alle drei `public: true` — deshalb erscheinen genau diese drei in `site/`, wenn es gebaut wird.
 - `knowledge/quellen/frontend-web.md` zeigt das Gegenteil eines Wissenseintrags: eine Rangfolge von Nachschlagequellen plus die eigene Versionsbindung. Die Bindung an eine Version ist Eigenwissen, der Inhalt der Version nicht.
+- `knowledge/konzepte/privat/2026-08-heimnetz-neuaufbau.md` steht neben `konzepte/geschaeftlich/` und zeigt damit die Sphären-Trennung an einem echten Paar statt nur als Regel.
 - `knowledge/secrets/beispiel-credential.yaml` ist echt SOPS-verschlüsselt (nicht simuliert), aber mit einem Demo-Schlüssel, dessen privater Teil nirgends im Repo existiert — für niemanden entschlüsselbar, rein zur Strukturdemonstration.
 - `knowledge/prozesse/kunden-onboarding.md` zeigt, wie ein wiederkehrender Ablauf einmal festgehalten wird, statt in jedem Projekt neu erfunden zu werden — und verweist auf die Vorgangs-Kategorien, die er auslöst.
 - Die Einträge unter `kunden/`, `projekte/`, `angebote/`, `konzepte/`, `auftragsbestaetigungen/`, `protokolle/`, `aenderungen/`, `abnahmen/`, `abrechnung/`, `dokumentation/` und `service/` bilden einen durchgängigen Freelancer-Vorgang ab. Sie zeigen, wie ein RAG-System Projekt- und Geschäftskontext nutzen kann, ohne auf generierte PDFs angewiesen zu sein.

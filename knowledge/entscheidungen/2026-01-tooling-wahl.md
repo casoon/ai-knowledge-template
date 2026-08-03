@@ -6,6 +6,7 @@ last_reviewed: 2026-01-15
 status: aktuell
 source: "Architektur-Review, 2026-01-15"
 related: ["../glossar/rag.md"]
+sphere: geschaeftlich
 ---
 
 ## Kontext
