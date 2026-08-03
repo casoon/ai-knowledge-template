@@ -14,6 +14,22 @@ Kein Framework, keine Build-Pipeline für `knowledge/`.
 - `.claude/skills/` — die Abläufe für Dokumente, Locales und die Verknüpfung
   zwischen `knowledge/` und `documents/`.
 
+## Bevor du einen Eintrag anlegst
+
+Prüfe: **Kann ein KI-System das zuverlässig aus einer vertrauenswürdigen
+öffentlichen Quelle beziehen?** Wenn ja, gehört es nicht hierher. Diese Basis
+ist das Gedächtnis der Organisation, nicht ihre Enzyklopädie.
+
+Keine kopierte Framework-, Sprach- oder Tool-Dokumentation. Stattdessen unter
+`knowledge/quellen/` festhalten, welche Referenz für welches Thema gilt. Die
+Bindung an eine Version ist Eigenwissen, der Inhalt der Version nicht.
+
+Am wertvollsten sind `entscheidungen/` und `prozesse/` — das Warum und das Wie,
+die nirgends sonst stehen. Wenn du beim Zusammenfassen eines Vorgangs auf eine
+begründete Entscheidung stößt, gehört sie zusätzlich als eigener Eintrag nach
+`entscheidungen/`, nicht nur als Satz in der Zusammenfassung. Sonst ist sie
+gespeichert, aber nicht auffindbar.
+
 ## Regeln
 
 - Standard ist `public: false`. Ein Eintrag wird aktiv freigegeben, nie

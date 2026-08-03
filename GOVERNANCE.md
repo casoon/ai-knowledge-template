@@ -19,9 +19,42 @@ Die Zuständigkeit pro Ordner lässt sich technisch über [`.github/CODEOWNERS`]
 
 Zugriffsrechte einer KI auf diese Wissensbasis entsprechen den Zugriffsrechten, die ein Mensch in derselben Rolle hätte — nicht mehr. Ein Zugriff, der einer Person nicht zustünde, steht auch keinem KI-System zu, das in ihrem Namen agiert.
 
+## Was hier hineingehört
+
+Eine Wissensbasis für KI-Systeme ist das Gedächtnis einer Organisation, nicht ihre Enzyklopädie. Die Aufnahmefrage lautet deshalb nicht "ist das wichtig?", sondern:
+
+> **Kann ein KI-System diese Information zuverlässig aus einer vertrauenswürdigen öffentlichen Quelle beziehen?**
+
+Ja → gehört meistens nicht hinein. Nein → gehört wahrscheinlich hinein.
+
+Eine schärfere Fassung derselben Frage: Könnte jemand, der die Organisation morgen verlässt, diesen Inhalt aus öffentlichen Quellen rekonstruieren? Wenn ja, kostet der Eintrag Pflege, ohne etwas beizutragen.
+
+Vier Bereiche machen den Kern aus, und die Kategorien in `_types.yml` ordnen sich ihnen zu:
+
+| Bereich | Frage | Kategorien |
+| --- | --- | --- |
+| Identität | Wer sind wir, für wen arbeiten wir? | `produkte/`, `glossar/`, `kunden/` |
+| Entscheidungen | Warum machen wir es so und nicht anders? | `entscheidungen/` |
+| Prozesse | Wie arbeiten wir? | `prozesse/` |
+| Kontext | Was ist in einem Vorgang passiert? | `projekte/`, `konzepte/`, `protokolle/`, `angebote/`, `abrechnung/`, … |
+
+**Entscheidungen sind der wertvollste Teil.** Ein gutes System beantwortet nicht "wie funktioniert Astro?", sondern "warum setzen wir in diesem Projekt statisches Rendering ein?". Solche Begründungen gehen sonst verloren und werden immer wieder neu getroffen oder neu erklärt. Sie stehen in keiner Dokumentation der Welt.
+
+Achte dabei auf die Balance. Kontext entsteht von selbst — jeder Vorgang erzeugt Material. Identität, Entscheidungen und Prozesse muss jemand aktiv aufschreiben. Eine Basis, die fast nur aus Vorgängen besteht, hat viel Inhalt und wenig Gedächtnis.
+
 ## Was hier nicht landet
 
-Personenbezogene Daten, vertrauliche Verträge, interne Bewertungen einzelner Personen. Im Zweifel: nicht aufnehmen, sondern separat und zugriffsbeschränkt verwalten.
+Alles, was sich ständig ändert und anderswo besser gepflegt wird: Sprach- und Framework-Dokumentation, HTML- und CSS-Referenzen, Git-Handbücher, Linux-Befehle. Solche Kopien veralten schnell, verwässern das Retrieval und erzeugen Pflegeaufwand ohne Gegenwert.
+
+Statt Inhalte zu kopieren, hält `quellen/` fest, **welche Quelle für welches Thema in welcher Reihenfolge gilt**. Damit weiß ein Agent, wo er nachschlägt, statt sich auf einen veralteten Auszug im Index zu verlassen.
+
+Eine Ausnahme ist erwähnenswert, weil sie oft übersehen wird: Die *Bindung* an eine Version ist eigenes Wissen, der Inhalt der Version nicht. "Wir sind auf Astro 6" gehört hinein — die dortige API-Referenz nicht, sondern nur als Verweis.
+
+Außerdem nicht hierher: personenbezogene Daten, vertrauliche Verträge, interne Bewertungen einzelner Personen. Im Zweifel nicht aufnehmen, sondern separat und zugriffsbeschränkt verwalten.
+
+## Wie ein Eintrag altert
+
+Entscheidungen sammeln sich nicht an, sie werden abgelöst. Ein überholter Eintrag wird nicht überschrieben, sondern bekommt `status: veraltet` und einen `related`-Verweis auf seinen Nachfolger. Das erhält die Frage "warum haben wir das damals anders entschieden?" — oft die eigentlich interessante.
 
 ## Sensible Daten im privaten Klon
 

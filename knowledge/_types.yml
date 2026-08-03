@@ -32,6 +32,10 @@ categories:
     kind: knowledge_entry
     type: glossar
     review_interval_days: 365
+  quellen:
+    kind: knowledge_entry
+    type: quelle
+    review_interval_days: 365
   kunden:
     kind: knowledge_entry
     type: kunde

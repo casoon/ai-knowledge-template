@@ -1,6 +1,6 @@
 ---
 title: ""
-type: entscheidung | prozess | produkt | glossar | kunde | projekt | angebot | konzept | dokumentation | auftragsbestaetigung | protokoll | aenderung | abnahme | abrechnung | service
+type: entscheidung | prozess | produkt | glossar | quelle | kunde | projekt | angebot | konzept | dokumentation | auftragsbestaetigung | protokoll | aenderung | abnahme | abrechnung | service
 created: YYYY-MM-DD
 last_reviewed: YYYY-MM-DD
 status: aktuell
